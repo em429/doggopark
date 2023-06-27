@@ -1,10 +1,10 @@
 [project]
 # The name of your game's executable. This should only contain a-z, A-Z, 0-9, _ or -.
-name = "smaug_zoey_balling"
+name = "Doggopark"
 # The game's title. This will show up in the tile bar of your executable.
-title = "smaug_zoey_balling"
+title = "Doggopark"
 version = "0.1.0"
-authors = ["My Name <todo@example.com>"]
+authors = ["qirpi <itch.login@mem.cool>"]
 icon = "metadata/icon.png"
 compile_ruby = false
 
