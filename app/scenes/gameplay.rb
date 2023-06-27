@@ -1,4 +1,19 @@
 def handle_movement args
+  # Animate player sprite when moving
+  player_sprite_index = 0.frame_index count: 3, hold_for: 8, repeat: true
+  if args.inputs.right || args.inputs.left || args.inputs.up || args.inputs.down
+    args.state.player.path = SPATHS["zoey_#{player_sprite_index}".to_sym]
+  else
+    args.state.player.path = SPATHS[:zoey_0]
+  end
+
+  # Make sure player speed doesn't double if x and y direction are both pressed
+  if (args.inputs.right && args.inputs.up) || (args.inputs.left && args.inputs.up) || (args.inputs.left && args.inputs.down) || (args.inputs.right && args.inputs.down)
+    args.state.player.speed = 7.5
+  else
+    args.state.player.speed = 10
+  end
+  
   if args.inputs.right
     args.state.player.x += args.state.player.speed
   elsif args.inputs.left
@@ -10,19 +25,9 @@ def handle_movement args
     args.state.player.y -= args.state.player.speed
   end
 
-  # Boundaries; show up on other side if we go out of screen
-  if args.state.player.x < args.grid.left
-    args.state.player.x = args.grid.right
-  end
-  if args.state.player.x > args.grid.right
-    args.state.player.x = args.grid.left
-  end
-  if args.state.player.y > args.grid.top
-    args.state.player.y = args.grid.bottom
-  end
-  if args.state.player.y < args.grid.bottom
-    args.state.player.y = args.grid.top
-  end
+  # Wrap-around Boundary; show up on other side if we go out of screen
+  args.state.player.x %= args.grid.right
+  args.state.player.y %= args.grid.top
 end
 
 def ball args
@@ -32,7 +37,7 @@ def ball args
     y: rand(args.grid.top - 60) + 30,
     w: 20,
     h: 20,
-    path: SPATHS[:ball],
+    path: SPATHS[:ball_0],
   }
 end
 
@@ -56,7 +61,7 @@ end
 
 
 def check_game_over args
-  if args.state.timer == 0
+  if args.state.timer <= 0
     args.state.scene = "game_over"
     return
   else
@@ -78,6 +83,8 @@ def handle_ball_logic args
   args.state.balls.each do |ball|
     # Move each ball
     ball.x -= 10
+    ball_sprite_index = 0.frame_index count: 2, hold_for: 20, repeat: true
+    ball.path = SPATHS["ball_#{ball_sprite_index}".to_sym]
 
     # mark them dead if they collide with Zoey, and increase score and timer
     if args.geometry.intersect_rect?(ball, args.state.player)
@@ -101,5 +108,3 @@ def handle_ball_logic args
     #increase_difficulty args
   end
 end
-
-

@@ -18,8 +18,11 @@ BLEND_MULTIPLY = 4
 # Access in code with `SPATHS[:my_sprite]`
 # Replace with your sprites!
 SPATHS = {
-  zoey: "sprites/zoey-0.png",
-  ball: "sprites/ball.png"
+  zoey_0: "sprites/zoey-0.png",
+  zoey_1: "sprites/zoey-1.png",
+  zoey_2: "sprites/zoey-2.png",
+  ball_0: "sprites/spiky_ball-0.png",
+  ball_1: "sprites/spiky_ball-1.png",
 }
 
 GAME_TIME = 15 * FPS
