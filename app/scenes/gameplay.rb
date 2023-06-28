@@ -69,14 +69,9 @@ def check_game_over args
   end
 end
 
-def increase_difficulty args
-  args.state.difficulty -= 10
-  args.state.timer_bonus -= 0.1
-end
-
 def handle_ball_logic args
   # spawn ball if tick is dividible with a variable integer that represents the difficulty
-  if args.state.tick_count % args.state.difficulty == 0
+  if args.state.tick_count % 90 == 0
     args.state.balls << ball(args)
   end
 
@@ -104,7 +99,6 @@ def handle_ball_logic args
   # remove dead balls
   args.state.balls.reject! { |ball| ball.dead }
 
-  if args.state.score != 0 and args.state.score % 5 == 0
-    #increase_difficulty args
-  end
 end
+
+

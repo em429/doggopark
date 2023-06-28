@@ -42,13 +42,11 @@ def tick args
 end
 
 def set_default_game_state args
-  args.state.player = { x: 120, y: 500, w: 128, h: 118, path: SPATHS[:zoey], speed: 9 }
+  args.state.player = { x: 120, y: 0, w: 128, h: 118, path: SPATHS[:zoey_0], speed: 10 }
   args.state.score = 0
   args.state.timer = GAME_TIME
-  args.state.balls = [ ]
-  # The lower this is, the harder the game lol
-  args.state.difficulty = 100
   args.state.timer_bonus = 1.5
+  args.state.balls = [ ]
 end
 
 # The version of your game defined in `metadata/game_metadata.txt`
